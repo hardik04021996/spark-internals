@@ -48,20 +48,6 @@
   - `spark.sql.adaptive.skewJoin.skewedPartitionFactor`: Partition is skewed if >5x median size (default: 5)
   - `spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes`: Partition is skewed if >256MB (default: 256MB)
 
-## Flow Chart
-```mermaid
-graph TD
-    Stage0[Stage 0: Read Source] --> OutputExchange[Output Exchange]
-    OutputExchange -->|Shuffle/Sort| InputExchange[Input Exchange]
-    InputExchange --> Stage1[Stage 1: GroupBy/Join]
-    subgraph AQE
-        OutputExchange -.->|Compute Statistics| AQE_Stats[AQE Runtime Stats]
-        AQE_Stats -->|Adjust Shuffle Partitions| InputExchange
-        AQE_Stats -->|Switch Join/Skew| Stage1
-        AQE_Stats -->|Split Skewed Partitions| InputExchange
-    end
-```
-
 ## Tables
 | Feature                | Description                                                      |
 |------------------------|------------------------------------------------------------------|
