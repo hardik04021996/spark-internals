@@ -20,7 +20,7 @@
 - Total executor container memory = sum of all above.
 - YARN allocates container based on requested total; physical node limits apply (`yarn.scheduler.maximum-allocation-mb`).
 - JVM heap is for executor JVM; overhead is for Python workers, network buffers, and other non-JVM processes.
-- PySpark memory comes from overhead; limited if overhead is small.
+- In PySpark, Python worker memory is taken from memoryOverhead, so if overhead is small, Python-heavy workloads can hit OOM even when executor heap has free memory.
 
 ## UDF Memory Usage Comparison
 | UDF Type         | Executes in   | Uses JVM Heap | Uses Overhead | Notes                       |
