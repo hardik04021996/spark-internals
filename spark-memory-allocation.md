@@ -26,7 +26,7 @@
 | UDF Type         | Executes in   | Uses JVM Heap | Uses Overhead | Notes                       |
 |------------------|--------------|--------------|---------------|-----------------------------|
 | Python UDF       | Python Proc  | For serialization and exchange | Heavily       | Slowest, per-row overhead   |
-| Pandas UDF (Arrow)| Python+Arrow | Less as no serialization is required        | Heavily       | Fast, vectorized            |
+| Pandas UDF (Arrow)| Python+Arrow | Less as less serialization is required (as serialization happens in batches)        | Heavily       | Fast, vectorized            |
 | JVM UDF (Scala)  | JVM          | Fully        | Not needed    | Fastest, no serialization   |
 
 ## Additional Notes
